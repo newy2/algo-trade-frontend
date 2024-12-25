@@ -1,4 +1,4 @@
-import {useSearchParams} from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 export default function About() {
   const [searchParams] = useSearchParams();
@@ -12,5 +12,5 @@ export default function About() {
       <div>name: {name}</div>
       <div>groups: {groups.toString()}</div>
     </div>
-  )
+  );
 }

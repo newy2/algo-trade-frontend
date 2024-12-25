@@ -1,7 +1,7 @@
 export default class BaseModel {
   static fromJson<T extends object | object[], U extends typeof BaseModel>(
     this: U,
-    json: T
+    json: T,
   ): T extends object[] ? InstanceType<U>[] : InstanceType<U> {
     let result;
     if (Array.isArray(json)) {
@@ -15,7 +15,7 @@ export default class BaseModel {
 
   private static createInstance<T extends object, U extends typeof BaseModel>(
     this: U,
-    data: T
+    data: T,
   ): InstanceType<U> {
     // 객체 copy 성능이 안 좋으면 bindInstance 사용
     const result = new this();
@@ -34,7 +34,10 @@ export default class BaseModel {
   //   return result;
   // }
 
-  private static convertResultType<T extends object, U extends typeof BaseModel>(data: object | object[]) {
+  private static convertResultType<
+    T extends object,
+    U extends typeof BaseModel,
+  >(data: object | object[]) {
     return data as T extends object[] ? InstanceType<U>[] : InstanceType<U>;
   }
 

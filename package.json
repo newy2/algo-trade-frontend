@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev:local-server": "vite",
+    "dev:prod-server": "APP_ENV=prod npm run set:backend-api-url npm run dev",
+    "dev:test-server": "APP_ENV=test npm run set:backend-api-url npm run dev",
+    "set:backend-api-url": "VITE_BACKEND_API_URL=$(aws ssm get-parameter --name \"/code/delivery/$APP_ENV/backend/cloudfront/distribution/url\" --query \"Parameter.Value\" --output text)",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

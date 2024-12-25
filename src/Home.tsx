@@ -47,8 +47,8 @@ export default function Home() {
     navigation("/about?name=jay&groups=1&groups=2")
   }
 
-  function fetchData() {
-    void fetchList("/ping").then(response => setPingMessages([...pingMessages, response]));
+  function fetchData(path: string) {
+    void fetchList(path).then(response => setPingMessages([...pingMessages, response]));
   }
 
   console.log("import.meta.env", import.meta.env);
@@ -61,7 +61,7 @@ export default function Home() {
         <button onClick={onClickAboutButton}>Go About</button>
       </div>
       <div>
-        <button onClick={fetchData}>FetchData</button>
+        <button onClick={() => fetchData("/ping")}>FetchData</button>
       </div>
       <div>
         <div>ping message:</div>

@@ -1,5 +1,5 @@
-import {useNavigate, useSearchParams} from "react-router-dom"
-import {useEffect, useState} from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function decodeBase64(base64String: string) {
   try {
@@ -14,8 +14,9 @@ function getEnvBackendApiUrl() {
   return import.meta.env.VITE_BACKEND_API_URL;
 }
 
-function fetchList(path: string) {
-  return fetch(getEnvBackendApiUrl() + path).then(it => it.text());
+async function fetchList(path: string) {
+  const response = await fetch(getEnvBackendApiUrl() + path);
+  return await response.text();
 }
 
 function useRedirectPath() {
@@ -34,7 +35,7 @@ function useRedirectPath() {
     navigation(redirectPath, {
       replace: true,
     });
-  }, [navigation, searchParams])
+  }, [navigation, searchParams]);
 }
 
 export default function Home() {
@@ -44,20 +45,24 @@ export default function Home() {
   useRedirectPath();
 
   function onClickAboutButton() {
-    navigation("/about?name=jay&groups=1&groups=2")
+    navigation("/about?name=jay&groups=1&groups=2");
   }
 
   function fetchData(path: string) {
-    void fetchList(path).then(response => setPingMessages([...pingMessages, response]));
+    void fetchList(path).then((response) =>
+      setPingMessages([...pingMessages, response]),
+    );
   }
 
   console.log("import.meta.env", import.meta.env);
 
   return (
     <div>
-      <h1>Home v7</h1>
-      <div>import.meta.env.VITE_BACKEND_API_URL: {getEnvBackendApiUrl()}</div>
-      <div style={{margin: "10px 0"}}>
+      <h1 className="text-4xl text-blue-500">Home v7</h1>
+      <div className="container z-50 justify-center text-left md:text-center">
+        import.meta.env.VITE_BACKEND_API_URL: {getEnvBackendApiUrl()}
+      </div>
+      <div style={{ margin: "10px 0" }}>
         <button onClick={onClickAboutButton}>Go About</button>
       </div>
       <div>
@@ -70,5 +75,5 @@ export default function Home() {
         ))}
       </div>
     </div>
-  )
+  );
 }

@@ -74,6 +74,7 @@ export default function Home() {
           <div key={index}>{each}</div>
         ))}
       </div>
+      <button className="btn">헬로</button>
     </div>
   );
 }

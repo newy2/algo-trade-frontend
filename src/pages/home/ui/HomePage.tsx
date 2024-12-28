@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useRedirectPath } from "../lib/useRedirectPath";
-import { GET } from "../api/http";
+import { useRedirectPath } from "pages/home/lib/useRedirectPath";
+import { GET } from "pages/home/api/http";
 
 export function HomePage() {
   const [pingMessages, setPingMessages] = useState<string[]>([]);

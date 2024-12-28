@@ -1,4 +1,4 @@
-export default class BaseModel {
+export class BaseModel {
   static fromJson<T extends object | object[], U extends typeof BaseModel>(
     this: U,
     json: T,

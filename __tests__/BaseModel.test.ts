@@ -1,5 +1,5 @@
 import { assert, describe, test } from "vitest";
-import BaseModel from "../src/model/BaseModel";
+import { BaseModel } from "../src/shared/model";
 import * as _ from "lodash";
 
 describe("Single level JSON 을 Model 객체로 변환하는 방법", () => {

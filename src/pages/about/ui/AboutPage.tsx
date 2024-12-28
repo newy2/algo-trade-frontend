@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 
-export default function About() {
+export function AboutPage() {
   const [searchParams] = useSearchParams();
 
   const name = searchParams.get("name");

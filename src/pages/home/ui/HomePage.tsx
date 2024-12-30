@@ -2,10 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRedirectPath } from "pages/home/lib/useRedirectPath";
 import { fetchPingMessage } from "pages/home/api/fetchPingMessage";
+import { useToast } from "shared/ui/toast";
 
 export function HomePage() {
   const [pingMessages, setPingMessages] = useState<string[]>([]);
   const navigation = useNavigate();
+  const { addToast } = useToast();
 
   useRedirectPath();
 
@@ -18,7 +20,9 @@ export function HomePage() {
     setPingMessages([...pingMessages, response.message]);
   }
 
-  console.log("import.meta.env", import.meta.env);
+  const handleSuccess = () => {
+    addToast("success", "This is a success message!");
+  };
 
   return (
     <div>
@@ -39,7 +43,9 @@ export function HomePage() {
           <div key={index}>{each}</div>
         ))}
       </div>
-      <button className="btn">헬로</button>
+      <button className="btn" onClick={handleSuccess}>
+        토스트
+      </button>
       <div>H1111</div>
       <div>H1111</div>
       <div>H1111</div>

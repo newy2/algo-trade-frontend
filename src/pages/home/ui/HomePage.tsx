@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRedirectPath } from "pages/home/lib/useRedirectPath";
-import { GET } from "pages/home/api/http";
+import { fetchPingMessage } from "pages/home/api/fetchPingMessage";
 
 export function HomePage() {
   const [pingMessages, setPingMessages] = useState<string[]>([]);
@@ -14,8 +14,8 @@ export function HomePage() {
   }
 
   async function fetchData(path: string) {
-    const response = await GET(path);
-    setPingMessages([...pingMessages, response]);
+    const response = await fetchPingMessage(path);
+    setPingMessages([...pingMessages, response.message]);
   }
 
   console.log("import.meta.env", import.meta.env);

@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { HomePage } from "pages/home";
 import { AboutPage } from "pages/about";
-import { Layout } from "shared/ui";
+import { Layout } from "shared/ui/layout";
 
 export function AppRouter() {
   return (

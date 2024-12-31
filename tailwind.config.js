@@ -10,4 +10,10 @@ export default {
   daisyui: {
     themes: ["light"],
   },
+  safelist: [
+    {
+      pattern: /alert-+/,
+      variants: ["success", "error", "info", "warning"],
+    },
+  ],
 };

@@ -3,6 +3,7 @@ import { StrictMode } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ToastProvider } from "shared/ui/toast";
 import { ModalProvider } from "shared/ui/dialog";
+import { LogicErrorBoundary } from "shared/ui/error";
 
 export function App() {
   return (
@@ -10,7 +11,9 @@ export function App() {
       <BrowserRouter>
         <ModalProvider>
           <ToastProvider>
-            <AppRouter />
+            <LogicErrorBoundary>
+              <AppRouter />
+            </LogicErrorBoundary>
           </ToastProvider>
         </ModalProvider>
       </BrowserRouter>

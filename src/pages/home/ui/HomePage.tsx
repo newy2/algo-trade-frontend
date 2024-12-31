@@ -111,6 +111,14 @@ export function HomePage() {
     addToast("success", "This is a success message!");
   };
 
+  const throwError = () => {
+    throw new Error("Simple Error");
+  };
+
+  const throwErrorAsyncFunction = async () => {
+    throw new Error("Simple Error");
+  };
+
   console.log("render HomePage");
 
   return (
@@ -138,6 +146,18 @@ export function HomePage() {
       <button className="btn" onClick={handleSuccess}>
         토스트
       </button>
+
+      <div>
+        <button className="btn" onClick={throwError}>
+          에러 발생
+        </button>
+      </div>
+
+      <div>
+        <button className="btn" onClick={throwErrorAsyncFunction}>
+          async 함수 에러 발생
+        </button>
+      </div>
       <div>H1111</div>
       <div>H1111</div>
       <div>H1111</div>

@@ -55,9 +55,9 @@ FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
     - 예시: `features/product_price`에서 `entities/product_price` ${\color{green}{참조\ 가능}}$
     - 예시: `features/product_price`에서 `entities/strategy` ${\color{green}{참조\ 가능}}$
 
-- (예외) `entities Layer`는 cross-import API 로 `형제 Slice`를 참조할 수 있다.
+- (예외) `entities Layer`는 cross-import(@x) API 을 사용해서 `형제 Slice`를 참조할 수 있다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api#public-api-for-cross-imports))
-    - 예시: `entities/strategy/api/fetchStrategy.ts`에서 `entities/product/@x/strategy.ts` ${\color{green}{참조\ 가능}}$
+    - 예시: `entities/strategy`에서 `entities/product/@x/strategy(참조하는 Slice 이름).ts` ${\color{green}{참조\ 가능}}$
 
 ## Public API
 

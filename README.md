@@ -23,7 +23,7 @@ algo-trade 프론트엔드 프로젝트
     - [TanStack Query(React Query)](https://tanstack.com/query/latest): HTTP API 캐싱 데이터 관리 라이브러리
         - 추후, API 캐싱 기능이 필요한 경우 사용할 예정
     - [class-transformer](https://github.com/typestack/class-transformer): Model 클래스 라이브러리
-        - 우선, 직접 구현한 BaseModel 클래스를 사용하고, 추가 기능이 필요한 경우 도입을 고민한다.
+        - 우선, 직접 구현한 BaseModel 클래스를 사용하고, 추가 기능이 필요한 경우 도입을 고민
 
 # 사용한 외부 라이브러리
 

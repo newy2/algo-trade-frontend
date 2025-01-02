@@ -63,7 +63,7 @@ FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
 
 - `Slice`는 `Public API(index.ts 파일)`로 외부에서 필요한 컴포넌트만 내보낸다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api))
-- `Slice`가 있는 `Layer`는 `Segment`에 대한 `Public API`를 선언하지 않는다.
+- `shared Layer`를 제외하고, `Segment`에 대한 `Public API`를 선언하지 않는다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api#worse-performance-of-bundlers-on-large-projects))
     - 예시: `features/comment/index.ts` ${\color{green}{추천}}$
     - 예시: `features/comment/ui/index.ts` ${\color{red}{비추천}}$ (Slice 의 Public API 가 있으므로 비추천)

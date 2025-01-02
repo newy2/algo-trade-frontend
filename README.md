@@ -28,15 +28,15 @@ FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
 
 ## FSD 폴더 구성
 
-- FSD 는 {`Layer`}/{`Slice`}/{`Segment`} 계층으로 폴더를 구성한다.  
-  (예외) `app Layer`와 `shared Layer`는 `Slice`계층을 가질 수 없고, `Segment`계층만 구성할 수 있다.
-  ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))  
+- FSD 는 {`Layer`}/{`Slice`}/{`Segment`} 계층으로 폴더를 구성한다.   
   <img width="500" src="https://feature-sliced.design/kr/assets/images/visual_schema-e826067f573946613dcdc76e3f585082.jpg">
+- [예외] `app`, `shared` Layer는 `Segment`계층만 가질 수 있다.
+  ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))
 - `Layer` 는 의존성 순으로 `app` -> `pages` -> `widgets` -> `features` -> `entities` -> `shared` 가 있고,  
   순방향으로만 참조할 수 있다. ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))
-    - 예시: `app`에서 `pages`는 <span style="color:green">참조 가능</span>
-    - 예시: `app`에서 `shared`는 <span style="color:green">참조 가능</span>
-    - 예시: `pages`에서 `app`는 <span style="color:red">참조 불가능</span>
+    - 예시: `app`에서 `pages`는 ${\color{green}{참조\ 가능}}$
+    - 예시: `app`에서 `shared`는 ${\color{green}{참조\ 가능}}$
+    - 예시: `pages`에서 `app`는 ${\color{red}{참조\ 불가능}}$
 - `Slice`는 도메인 단위로 구성한다. ([링크](https://feature-sliced.design/kr/docs/reference/slices-segments#slices))
     - 예시: `pages/user_strategy`
     - 예시: `features/product_price`
@@ -48,17 +48,16 @@ FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
 ## Layer 간 참조 규칙 ([링크](https://feature-sliced.design/kr/docs/reference/layers#import-rule-on-layers))
 
 - `같은 Layer`의 `형제 Slice`는 참조할 수 없다.
-    - 예시: `features/product_price` 에서 `features/strategy` <span style="color:red">참조 불가능</span>
+    - 예시: `features/product_price` 에서 `features/strategy` ${\color{red}{참조\ 불가능}}$
 - `같은 Slice`의 `형제 Segment`는 참조할 수 있다.
-    - 예시: `features/product_price/api`에서 `features/product_price/lib` <span style="color:green">참조 가능</span>
+    - 예시: `features/product_price/api`에서 `features/product_price/lib` ${\color{green}{참조\ 가능}}$
 - `상위 Layer`에서 `하위 Layer`의 `모든 Slice`를 참조할 수 있다.
-    - 예시: `features/product_price`에서 `entities/product_price` <span style="color:green">참조 가능</span>
-    - 예시: `features/product_price`에서 `entities/strategy` <span style="color:green">참조 가능</span>
+    - 예시: `features/product_price`에서 `entities/product_price` ${\color{green}{참조\ 가능}}$
+    - 예시: `features/product_price`에서 `entities/strategy` ${\color{green}{참조\ 가능}}$
 
 - (예외) `entities Layer`는 cross-import API 로 `형제 Slice`를 참조할 수 있다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api#public-api-for-cross-imports))
-    - 예시: `entities/strategy/api/fetchStrategy.ts`에서 `entities/product/@x/strategy.ts` <span style="color:green">참조
-      가능</span>
+    - 예시: `entities/strategy/api/fetchStrategy.ts`에서 `entities/product/@x/strategy.ts` ${\color{green}{참조\ 가능}}$
 
 ## Public API
 
@@ -66,13 +65,13 @@ FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api))
 - `Slice`가 있는 `Layer`는 `Segment`에 대한 `Public API`를 선언하지 않는다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api#worse-performance-of-bundlers-on-large-projects))
-    - 예시: `features/comment/index.ts` <span style="color:green">추천</span>
-    - 예시: `features/comment/ui/index.ts` <span style="color:red">비추천</span> (Slice 의 Public API 가 있으므로 비추천)
+    - 예시: `features/comment/index.ts` ${\color{green}{추천}}$
+    - 예시: `features/comment/ui/index.ts` ${\color{red}{비추천}}$ (Slice 의 Public API 가 있으므로 비추천)
 - `shared/ui Segment`와 `shared/lib Segment`는 단일 `Public API`를 선언하지 말고, 하위 폴더 별로 `Public API`를 선언한다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api#large-bundles))
-    - 예시: `shared/ui/index.ts` <span style="color:red">비추천</span>
-    - 예시: `shared/ui/button/index.ts` <span style="color:green">추천</span>
-    - 예시: `shared/ui/text_filed/index.ts` <span style="color:green">추천</span>
+    - 예시: `shared/ui/index.ts` ${\color{red}{비추천}}$
+    - 예시: `shared/ui/button/index.ts` ${\color{green}{추천}}$
+    - 예시: `shared/ui/text_filed/index.ts` ${\color{green}{추천}}$
 - `같은 Slice`에서는 상대경로로 참조하고, `다른 Slice`에서는 절대경로로 참조한다
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api#circular-imports))
 

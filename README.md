@@ -32,18 +32,18 @@ FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
   (예외) `app Layer`와 `shared Layer`는 `Slice`계층을 가질 수 없고, `Segment`계층만 구성할 수 있다.
   ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))  
   <img width="500" src="https://feature-sliced.design/kr/assets/images/visual_schema-e826067f573946613dcdc76e3f585082.jpg">
-- `Layer` 는 의존성 순으로 `app` -> `pages` -> `widgets` -> `features` -> `entities` -> `shared` 가 있고, 순방향으로만 참조할 수
-  있다. ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))
+- `Layer` 는 의존성 순으로 `app` -> `pages` -> `widgets` -> `features` -> `entities` -> `shared` 가 있고,  
+  순방향으로만 참조할 수 있다. ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))
     - 예시: `app`에서 `pages`는 <span style="color:green">참조 가능</span>
     - 예시: `app`에서 `shared`는 <span style="color:green">참조 가능</span>
     - 예시: `pages`에서 `app`는 <span style="color:red">참조 불가능</span>
 - `Slice`는 도메인 단위로 구성한다. ([링크](https://feature-sliced.design/kr/docs/reference/slices-segments#slices))
-    - 예시: `page/user_strategy`
+    - 예시: `pages/user_strategy`
     - 예시: `features/product_price`
 - `Segment`는 기능 단위로 구성한다. ([링크](https://feature-sliced.design/kr/docs/reference/slices-segments#segments))
-    - 예시: `page/user_strategy/ui`: UI 관련 컴포넌트
-    - 예시: `page/user_strategy/api`: API 통신 관련 로직
-    - 예시: `page/user_strategy/model`: 비즈니스 관련 로직
+    - 예시: `pages/user_strategy/ui`: UI 관련 컴포넌트
+    - 예시: `pages/user_strategy/api`: API 통신 관련 로직
+    - 예시: `pages/user_strategy/model`: 비즈니스 관련 로직
 
 ## Layer 간 참조 규칙 ([링크](https://feature-sliced.design/kr/docs/reference/layers#import-rule-on-layers))
 
@@ -67,7 +67,7 @@ FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
 - `Slice`가 있는 `Layer`는 `Segment`에 대한 `Public API`를 선언하지 않는다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api#worse-performance-of-bundlers-on-large-projects))
     - 예시: `features/comment/index.ts` <span style="color:green">추천</span>
-    - 예시: `features/comment/ui/index.ts` <span style="color:red">비추천</span>
+    - 예시: `features/comment/ui/index.ts` <span style="color:red">비추천</span> (Slice 의 Public API 가 있으므로 비추천)
 - `shared/ui Segment`와 `shared/lib Segment`는 단일 `Public API`를 선언하지 말고, 하위 폴더 별로 `Public API`를 선언한다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api#large-bundles))
     - 예시: `shared/ui/index.ts` <span style="color:red">비추천</span>

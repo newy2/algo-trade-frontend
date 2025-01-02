@@ -1,3 +1,32 @@
+# 프로젝트 설명
+
+## 프로젝트 이름
+
+algo-trade 프론트엔드 프로젝트
+
+## 사용한 기술
+
+페이지 로딩 시간 단축을 위해, 가능한 최소한의 라이브러리만 사용한다
+
+- 프로그래밍 언어
+    - [TypeScript](https://www.typescriptlang.org/)
+- 사용 중인 라이브러리
+    - [lodash](https://lodash.com/): 데이터 조작 라이브러리
+    - [react, react-dom](https://ko.legacy.reactjs.org/): View 라이브러리
+    - [react-router-dom](https://reactrouter.com/): React Router 라이브러리
+    - [Tailwind CSS](https://tailwindcss.com/): 유틸리티 CSS 라이브러리
+    - [daisyUI](https://daisyui.com/): Tailwind CSS 기반의 유틸리티 CSS 라이브러리
+    - [Fetch API](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API): 브라우저에서 기본으로 제공하는 HTTP 통신 API
+- 사용 대기 라이브러리
+    - [Zustand](https://zustand-demo.pmnd.rs/): 상태 관리 라이브러리
+        - 추후, 관리해야 할 전역 상태가 많아지면 사용할 예정
+    - [TanStack Query(React Query)](https://tanstack.com/query/latest): HTTP API 캐싱 데이터 관리 라이브러리
+        - 추후, API 캐싱 기능이 필요한 경우 사용할 예정
+    - [class-transformer](https://github.com/typestack/class-transformer): Model 클래스 라이브러리
+        - 우선, 직접 구현한 BaseModel 클래스를 사용하고, 추가 기능이 필요한 경우 도입을 고민한다.
+
+# 사용한 외부 라이브러리
+
 # 폴더 설명
 
 해당 프로젝트는 FSD([Feature-seliced Design; 기능 분할 설계](https://feature-sliced.design/kr/)) v2.1 기준으로 폴더를 구성한다.

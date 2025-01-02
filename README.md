@@ -25,8 +25,6 @@ algo-trade 프론트엔드 프로젝트
     - [class-transformer](https://github.com/typestack/class-transformer): Model 클래스 라이브러리
         - 우선, 직접 구현한 BaseModel 클래스를 사용하고, 추가 기능이 필요한 경우 도입을 고민
 
-# 사용한 외부 라이브러리
-
 # 폴더 설명
 
 해당 프로젝트는 FSD([Feature-seliced Design; 기능 분할 설계](https://feature-sliced.design/kr/)) v2.1 기준으로 폴더를 구성한다.
@@ -55,7 +53,7 @@ FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
 
 # FSD 설명
 
-## FSD 폴더 구성
+## FSD 기본 규칙
 
 - FSD 는 {`Layer`}/{`Slice`}/{`Segment`} 계층으로 폴더를 구성한다.   
   <img width="500" src="https://feature-sliced.design/kr/assets/images/visual_schema-e826067f573946613dcdc76e3f585082.jpg">
@@ -88,7 +86,7 @@ FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api#public-api-for-cross-imports))
     - 예시: `entities/strategy`에서 `entities/product/@x/strategy(참조하는 Slice 이름).ts` ${\color{green}{참조\ 가능}}$
 
-## Public API
+## Public API 규칙
 
 - `Slice`는 `Public API(index.ts 파일)`로 외부에서 필요한 컴포넌트만 내보낸다.
   ([링크](https://feature-sliced.design/kr/docs/reference/public-api))

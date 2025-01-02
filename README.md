@@ -1,6 +1,6 @@
 # 폴더 설명
 
-FSD([Feature-seliced Design; 기능 분할 설계](https://feature-sliced.design/kr/)) v2.1 기준으로 폴더를 구성한다.
+해당 프로젝트는 FSD([Feature-seliced Design; 기능 분할 설계](https://feature-sliced.design/kr/)) v2.1 기준으로 폴더를 구성한다.
 
 ## \_\_tests__
 

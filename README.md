@@ -1,50 +1,78 @@
-# React + TypeScript + Vite
+# 폴더 설명
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FSD([Feature-seliced Design; 기능 분할 설계](https://feature-sliced.design/kr/)) v2.1 기준으로 폴더를 구성한다.
 
-Currently, two official plugins are available:
+## \_\_tests__
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+테스트 파일을 선언한다.
 
-## Expanding the ESLint configuration
+## script
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+배포 스크립트를 선언한다.
 
-- Configure the top-level `parserOptions` property like this:
+## src/app
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+FSD Layer. App 을 시작하기 위한 컴포넌트를 선언한다.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## aws/pages
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+FSD Layer. Route 별 페이지를 구성하는 컴포넌트를 선언한다.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## aws/shared
+
+FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
+
+---
+
+# FSD 설명
+
+## FSD 폴더 구성
+
+- FSD 는 {`Layer`}/{`Slice`}/{`Segment`} 계층으로 폴더를 구성한다.  
+  (예외) `app Layer`와 `shared Layer`는 `Slice`계층을 가질 수 없고, `Segment`계층만 구성할 수 있다.
+  ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))  
+  <img width="500" src="https://feature-sliced.design/kr/assets/images/visual_schema-e826067f573946613dcdc76e3f585082.jpg">
+- `Layer` 는 의존성 순으로 `app` -> `pages` -> `widgets` -> `features` -> `entities` -> `shared` 가 있고,  
+  순방향으로만 참조할 수 있다. ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))
+    - 예시: `app`에서 `pages`는 <span style="color:green">참조 가능</span>
+    - 예시: `app`에서 `shared`는 <span style="color:green">참조 가능</span>
+    - 예시: `pages`에서 `app`는 <span style="color:red">참조 불가능</span>
+- `Slice`는 도메인 단위로 구성한다. ([링크](https://feature-sliced.design/kr/docs/reference/slices-segments#slices))
+    - 예시: `pages/user_strategy`
+    - 예시: `features/product_price`
+- `Segment`는 기능 단위로 구성한다. ([링크](https://feature-sliced.design/kr/docs/reference/slices-segments#segments))
+    - 예시: `pages/user_strategy/ui`: UI 관련 컴포넌트
+    - 예시: `pages/user_strategy/api`: API 통신 관련 로직
+    - 예시: `pages/user_strategy/model`: 비즈니스 관련 로직
+
+## Layer 간 참조 규칙 ([링크](https://feature-sliced.design/kr/docs/reference/layers#import-rule-on-layers))
+
+- `같은 Layer`의 `형제 Slice`는 참조할 수 없다.
+    - 예시: `features/product_price` 에서 `features/strategy` <span style="color:red">참조 불가능</span>
+- `같은 Slice`의 `형제 Segment`는 참조할 수 있다.
+    - 예시: `features/product_price/api`에서 `features/product_price/lib` <span style="color:green">참조 가능</span>
+- `상위 Layer`에서 `하위 Layer`의 `모든 Slice`를 참조할 수 있다.
+    - 예시: `features/product_price`에서 `entities/product_price` <span style="color:green">참조 가능</span>
+    - 예시: `features/product_price`에서 `entities/strategy` <span style="color:green">참조 가능</span>
+
+- (예외) `entities Layer`는 cross-import API 로 `형제 Slice`를 참조할 수 있다.
+  ([링크](https://feature-sliced.design/kr/docs/reference/public-api#public-api-for-cross-imports))
+    - 예시: `entities/strategy/api/fetchStrategy.ts`에서 `entities/product/@x/strategy.ts` <span style="color:green">참조
+      가능</span>
+
+## Public API
+
+- `Slice`는 `Public API(index.ts 파일)`로 외부에서 필요한 컴포넌트만 내보낸다.
+  ([링크](https://feature-sliced.design/kr/docs/reference/public-api))
+- `Slice`가 있는 `Layer`는 `Segment`에 대한 `Public API`를 선언하지 않는다.
+  ([링크](https://feature-sliced.design/kr/docs/reference/public-api#worse-performance-of-bundlers-on-large-projects))
+    - 예시: `features/comment/index.ts` <span style="color:green">추천</span>
+    - 예시: `features/comment/ui/index.ts` <span style="color:red">비추천</span> (Slice 의 Public API 가 있으므로 비추천)
+- `shared/ui Segment`와 `shared/lib Segment`는 단일 `Public API`를 선언하지 말고, 하위 폴더 별로 `Public API`를 선언한다.
+  ([링크](https://feature-sliced.design/kr/docs/reference/public-api#large-bundles))
+    - 예시: `shared/ui/index.ts` <span style="color:red">비추천</span>
+    - 예시: `shared/ui/button/index.ts` <span style="color:green">추천</span>
+    - 예시: `shared/ui/text_filed/index.ts` <span style="color:green">추천</span>
+- `같은 Slice`에서는 상대경로로 참조하고, `다른 Slice`에서는 절대경로로 참조한다
+  ([링크](https://feature-sliced.design/kr/docs/reference/public-api#circular-imports))
+

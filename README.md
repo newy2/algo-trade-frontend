@@ -28,13 +28,13 @@ FSD Layer. 여러 레이어에서 사용하는 컴포넌트를 선언한다.
 
 ## FSD 폴더 구성
 
-- FSD 는 {`Layer`}/{`Slice`}/{`Segment`} 계층으로 폴더를 구성한다.  
-  (예외) `app Layer`와 `shared Layer`는 `Slice`계층을 가질 수 없고, `Segment`계층만 구성할 수 있다.
-  ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))  
+- FSD 는 {`Layer`}/{`Slice`}/{`Segment`} 계층으로 폴더를 구성한다.   
   <img width="500" src="https://feature-sliced.design/kr/assets/images/visual_schema-e826067f573946613dcdc76e3f585082.jpg">
+- [예외] `app`, `shared` Layer는 `Segment`계층만 가질 수 있다.
+  ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))
 - `Layer` 는 의존성 순으로 `app` -> `pages` -> `widgets` -> `features` -> `entities` -> `shared` 가 있고,  
   순방향으로만 참조할 수 있다. ([링크](https://feature-sliced.design/kr/docs/get-started/overview#layers))
-    - 예시: `app`에서 `pages`는 <span style="color:green">참조 가능</span>
+    - 예시: `app`에서 `pages`는 ${\color{green}{참조\ 가능}}$
     - 예시: `app`에서 `shared`는 <span style="color:green">참조 가능</span>
     - 예시: `pages`에서 `app`는 <span style="color:red">참조 불가능</span>
 - `Slice`는 도메인 단위로 구성한다. ([링크](https://feature-sliced.design/kr/docs/reference/slices-segments#slices))
